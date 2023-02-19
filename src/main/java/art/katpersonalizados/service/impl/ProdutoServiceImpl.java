@@ -7,6 +7,7 @@ import art.katpersonalizados.model.Produto;
 import art.katpersonalizados.repository.CategoriaRepository;
 import art.katpersonalizados.repository.ProdutoRepository;
 import art.katpersonalizados.service.ProdutoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     private final ProdutoRepository produtoRepository;
     private final CategoriaRepository categoriaRepository;
+
+    // Constante para o status HTTP 404 not fouund
+    private static final HttpStatus NOT_FOUND = HttpStatus.NOT_FOUND;
 
     public ProdutoServiceImpl(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository) {
         this.produtoRepository = produtoRepository;
@@ -35,7 +39,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ResponseEntity<List<Produto>> buscarPorDescricao(String descricao) {
         List<Produto> produtos = produtoRepository.findByDescricaoContainsIgnoreCase(descricao);
         if (produtos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(NOT_FOUND).build();
         } else {
             return ResponseEntity.ok(produtos);
         }
@@ -52,7 +56,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ResponseEntity<List<Produto>> buscarTodos() {
         List<Produto> produtos = produtoRepository.findAll();
         if (produtos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(NOT_FOUND).build();
         } else {
             return ResponseEntity.ok(produtos);
         }
@@ -62,7 +66,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ResponseEntity<List<Produto>> buscarPorNomeCategoria(String nome) {
         List<Produto> produtos = produtoRepository.findByCategoria_NomeIgnoreCase(nome);
         if (produtos.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(NOT_FOUND).build();
         } else {
             return ResponseEntity.ok(produtos);
         }
@@ -75,6 +79,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         return setAtributos(produtoDto, p);
     }
 
+    // método interno auxiliar, para salvar e atualizar
     private ResponseEntity<Produto> setAtributos(ProdutoDto produtoDto, Produto p) {
         Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.getCategoria().getNome());
 

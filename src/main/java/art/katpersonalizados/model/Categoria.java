@@ -1,6 +1,7 @@
 package art.katpersonalizados.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Categoria {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "nome")
     private String nome;
 

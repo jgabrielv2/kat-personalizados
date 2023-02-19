@@ -1,6 +1,8 @@
 package art.katpersonalizados.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -11,12 +13,15 @@ public class Produto {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
     @Column(name = "descricao")
     private String descricao;
 
+    @NotNull
     @Column(name = "preco", precision = 19, scale = 2)
     private BigDecimal preco;
 
+    @Valid
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

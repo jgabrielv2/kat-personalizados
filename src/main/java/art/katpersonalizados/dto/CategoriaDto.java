@@ -1,5 +1,7 @@
 package art.katpersonalizados.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,6 +9,8 @@ import java.util.Objects;
  * A DTO for the {@link art.katpersonalizados.model.Categoria} entity
  */
 public class CategoriaDto implements Serializable {
+
+    @NotNull
     private final String nome;
 
     public CategoriaDto(String nome) {

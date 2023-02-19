@@ -1,6 +1,8 @@
 package art.katpersonalizados.dto;
 
 import art.katpersonalizados.model.Categoria;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -10,8 +12,13 @@ import java.util.Objects;
  * A DTO for the {@link art.katpersonalizados.model.Produto} entity
  */
 public class ProdutoDto implements Serializable {
+
+    @NotNull
     private final String descricao;
+
+    @NotNull
     private final BigDecimal preco;
+    @Valid
     private final Categoria categoria;
 
     public ProdutoDto(String descricao, BigDecimal preco, Categoria categoria) {
