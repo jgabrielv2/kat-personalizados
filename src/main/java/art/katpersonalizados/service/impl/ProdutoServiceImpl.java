@@ -17,11 +17,10 @@ import java.util.Optional;
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
 
-    private final ProdutoRepository produtoRepository;
-    private final CategoriaRepository categoriaRepository;
-
     // Constante para o status HTTP 404 not fouund
     private static final HttpStatus NOT_FOUND = HttpStatus.NOT_FOUND;
+    private final ProdutoRepository produtoRepository;
+    private final CategoriaRepository categoriaRepository;
 
     public ProdutoServiceImpl(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository) {
         this.produtoRepository = produtoRepository;
@@ -81,12 +80,10 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     // método interno auxiliar, para salvar e atualizar
     private ResponseEntity<Produto> setAtributos(ProdutoDto produtoDto, Produto p) {
-        Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.getCategoria().getNome());
 
-        if (c == null) {
-            c = new Categoria();
-            c.setNome(produtoDto.getCategoria().getNome());
-        }
+        Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.getCategoria().getNome()).orElse(new Categoria());
+        c.setNome(produtoDto.getCategoria().getNome());
+
 
         p.setDescricao(produtoDto.getDescricao());
         p.setPreco(produtoDto.getPreco());
@@ -96,8 +93,10 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public void excluir(Long id) {
-
-        produtoRepository.deleteById(id);
-
+        if (!produtoRepository.existsById(id)) {
+        throw new NotFoundException("Produto não encontrado com a id " + id);
+        } else {
+            produtoRepository.deleteById(id);
+        }
     }
 }
