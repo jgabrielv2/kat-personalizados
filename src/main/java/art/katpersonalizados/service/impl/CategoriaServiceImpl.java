@@ -46,7 +46,7 @@ public class CategoriaServiceImpl implements CategoriaService {
         return optionalCategoria.map(ResponseEntity::ok).orElseThrow(() -> new NotFoundException("Categoria " + nome + " não encontrada!"));
     }
 
-    // Lista todas as Categorias. Se houver nenhuma, retorna o HTTp status Not Found
+    // Lista todas as Categorias. Se houver nenhuma, retorna o HTTP status Not Found
     @Override
     public ResponseEntity<List<Categoria>> buscarTodos() {
         List<Categoria> categorias = categoriaRepository.findAll();
@@ -57,7 +57,6 @@ public class CategoriaServiceImpl implements CategoriaService {
             return ResponseEntity.ok(categorias);
         }
     }
-
     // Atualiza a Categoria de id informada. Se não existir, lança uma Not Found Exception
     @Override
     public ResponseEntity<Categoria> atualizar(Long id, CategoriaDto categoriaDto) {

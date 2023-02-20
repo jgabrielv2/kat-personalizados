@@ -1,14 +1,12 @@
 package art.katpersonalizados.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "cliente")
@@ -35,28 +33,48 @@ public class Cliente {
     @Size(max = 100)
     private String email;
 
+    @Valid
+    @Embedded
+    private Endereco endereco;
+
     @NotBlank
     @CPF
     @Pattern(regexp = "\\d{11}")
     private String cpf;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Endereco> enderecos = new ArrayList<>();
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
+
 
     public Cliente() {
     }
 
+    public String getSobrenome() {
+        return sobrenome;
+    }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getId() {
@@ -67,16 +85,20 @@ public class Cliente {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", enderecos=" + enderecos +
-                '}';
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
 }
