@@ -30,6 +30,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
+		<dependency>
+			<groupId>com.googlecode.libphonenumber</groupId>
+			<artifactId>libphonenumber</artifactId>
+			<version>8.13.6</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
