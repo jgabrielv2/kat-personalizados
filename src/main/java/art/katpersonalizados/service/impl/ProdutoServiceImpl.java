@@ -81,12 +81,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     // método interno auxiliar, para salvar e atualizar
     private ResponseEntity<Produto> setAtributos(ProdutoDto produtoDto, Produto p) {
 
-        Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.getCategoria().getNome()).orElse(new Categoria());
-        c.setNome(produtoDto.getCategoria().getNome());
+        Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.categoria().getNome()).orElse(new Categoria());
+        c.setNome(produtoDto.categoria().getNome());
 
 
-        p.setDescricao(produtoDto.getDescricao());
-        p.setPreco(produtoDto.getPreco());
+        p.setDescricao(produtoDto.descricao());
+        p.setPreco(produtoDto.preco());
         p.setCategoria(c);
         return ResponseEntity.ok(p);
     }

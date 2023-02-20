@@ -1,5 +1,6 @@
-package art.katpersonalizados.model;
+package art.katpersonalizados.dto;
 
+import art.katpersonalizados.model.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

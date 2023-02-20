@@ -1,7 +1,7 @@
 package art.katpersonalizados.service;
 
 import art.katpersonalizados.model.Cliente;
-import art.katpersonalizados.model.ClienteDto;
+import art.katpersonalizados.dto.ClienteDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

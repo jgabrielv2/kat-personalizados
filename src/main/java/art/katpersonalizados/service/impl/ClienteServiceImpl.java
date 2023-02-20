@@ -2,9 +2,9 @@ package art.katpersonalizados.service.impl;
 
 import art.katpersonalizados.exception.NotFoundException;
 import art.katpersonalizados.model.Cliente;
-import art.katpersonalizados.model.ClienteDto;
+import art.katpersonalizados.dto.ClienteDto;
 import art.katpersonalizados.model.Endereco;
-import art.katpersonalizados.model.EnderecoDto;
+import art.katpersonalizados.dto.EnderecoDto;
 import art.katpersonalizados.repository.ClienteRepository;
 import art.katpersonalizados.service.ClienteService;
 import art.katpersonalizados.validator.TelefoneValidator;
