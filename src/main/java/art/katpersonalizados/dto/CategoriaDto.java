@@ -10,8 +10,11 @@ import java.util.Objects;
  */
 public class CategoriaDto implements Serializable {
 
+    public CategoriaDto(){
+
+    }
     @NotNull
-    private final String nome;
+    private String nome;
 
     public CategoriaDto(String nome) {
         this.nome = nome;
