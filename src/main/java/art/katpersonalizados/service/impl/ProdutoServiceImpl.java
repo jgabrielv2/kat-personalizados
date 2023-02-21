@@ -7,10 +7,12 @@ import art.katpersonalizados.model.Produto;
 import art.katpersonalizados.repository.CategoriaRepository;
 import art.katpersonalizados.repository.ProdutoRepository;
 import art.katpersonalizados.service.ProdutoService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +35,17 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ResponseEntity<Produto> salvar(ProdutoDto produtoDto) {
         Produto p = new Produto();
         return setAtributos(produtoDto, p);
+    }
+
+    @Override
+    public ResponseEntity<List<Produto>> salvarTodos(List<ProdutoDto> produtoDtoList) {
+        List<Produto>produtos = new ArrayList<>();
+        for (ProdutoDto produtoDto : produtoDtoList){
+            Produto p = conversor(produtoDto);
+            produtos.add(p);
+        }
+        List<Produto> produtosSalvos = produtoRepository.saveAll(produtos);
+        return ResponseEntity.ok(produtosSalvos);
     }
 
     @Override
@@ -61,7 +74,11 @@ public class ProdutoServiceImpl implements ProdutoService {
             return ResponseEntity.ok(produtos);
         }
     }
-
+    private Produto conversor(ProdutoDto produtoDto){
+        Produto p = new Produto();
+        BeanUtils.copyProperties(produtoDto, p);
+        return p;
+    }
     @Override
     public ResponseEntity<List<Produto>> buscarPorNomeCategoria(String nome) {
         List<Produto> produtos = produtoRepository.findByCategoria_NomeIgnoreCase(nome);

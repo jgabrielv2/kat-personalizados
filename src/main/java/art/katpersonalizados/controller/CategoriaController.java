@@ -30,11 +30,6 @@ public class CategoriaController {
         return categoriaService.buscarPorId(id);
     }
 
-    @GetMapping("/{nome}")
-    public ResponseEntity<Categoria> buscarPorNome(@PathVariable String nome){
-        return categoriaService.buscarPorNome(nome);
-    }
-
     @GetMapping
     public ResponseEntity<List<Categoria>> buscarTodos(){
         return categoriaService.buscarTodos();

@@ -10,6 +10,8 @@ public interface ProdutoService {
 
     ResponseEntity<Produto> salvar (ProdutoDto produtoDto);
 
+    ResponseEntity<List<Produto>> salvarTodos (List<ProdutoDto> produtosDto);
+
     ResponseEntity<List<Produto>> buscarPorDescricao (String descricao);
 
     ResponseEntity<Produto> buscarPorId (Long id);
