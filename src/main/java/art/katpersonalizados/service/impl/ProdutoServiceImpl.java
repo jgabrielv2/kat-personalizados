@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
 
@@ -81,9 +82,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     // método interno auxiliar, para salvar e atualizar
     private ResponseEntity<Produto> setAtributos(ProdutoDto produtoDto, Produto p) {
 
-        Categoria c = categoriaRepository.findByNomeIgnoreCase(produtoDto.categoria().getNome()).orElse(new Categoria());
-        c.setNome(produtoDto.categoria().getNome());
-
+        Categoria c = categoriaRepository.findById(produtoDto.categoria().getId()).orElseThrow(() -> new NotFoundException("Categoria não encontrado!"));
 
         p.setDescricao(produtoDto.descricao());
         p.setPreco(produtoDto.preco());

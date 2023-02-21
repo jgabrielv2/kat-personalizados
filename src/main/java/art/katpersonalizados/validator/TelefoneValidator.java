@@ -4,6 +4,7 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class TelefoneValidator {
 
     public static boolean isValid(String telefone){

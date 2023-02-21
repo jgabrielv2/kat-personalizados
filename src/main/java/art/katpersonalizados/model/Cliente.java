@@ -9,11 +9,10 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-@Table(name = "cliente")
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
@@ -101,4 +100,16 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", email='" + email + '\'' +
+                ", endereco=" + endereco +
+                ", cpf='" + cpf + '\'' +
+                '}';
+    }
 }

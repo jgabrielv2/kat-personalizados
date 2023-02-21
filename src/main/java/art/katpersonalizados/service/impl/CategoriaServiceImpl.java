@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @Service
 public class CategoriaServiceImpl implements CategoriaService {
 
@@ -28,7 +29,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public ResponseEntity<Categoria> salvar(CategoriaDto categoriaDto) {
         Categoria c = new Categoria();
-        c.setNome(categoriaDto.getNome());
+        c.setNome(categoriaDto.nome());
         return ResponseEntity.ok(c);
     }
 
@@ -61,7 +62,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public ResponseEntity<Categoria> atualizar(Long id, CategoriaDto categoriaDto) {
         Categoria c = categoriaRepository.findById(id).orElseThrow(() -> new NotFoundException("Categoria não encontrada com a id" + id));
-        c.setNome(categoriaDto.getNome());
+        c.setNome(categoriaDto.nome());
         return ResponseEntity.ok(c);
     }
 

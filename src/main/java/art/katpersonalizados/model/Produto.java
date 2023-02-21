@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Entity
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -22,8 +22,7 @@ public class Produto {
     private BigDecimal preco;
 
     @Valid
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     public Categoria getCategoria() {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
