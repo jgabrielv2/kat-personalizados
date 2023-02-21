@@ -22,7 +22,7 @@ public class Produto {
     private BigDecimal preco;
 
     @Valid
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
 
     public Categoria getCategoria() {

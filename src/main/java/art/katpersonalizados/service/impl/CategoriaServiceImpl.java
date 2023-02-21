@@ -30,6 +30,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public ResponseEntity<Categoria> salvar(CategoriaDto categoriaDto) {
         Categoria c = new Categoria();
         c.setNome(categoriaDto.nome());
+        categoriaRepository.save(c);
         return ResponseEntity.ok(c);
     }
 
@@ -63,6 +64,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     public ResponseEntity<Categoria> atualizar(Long id, CategoriaDto categoriaDto) {
         Categoria c = categoriaRepository.findById(id).orElseThrow(() -> new NotFoundException("Categoria não encontrada com a id" + id));
         c.setNome(categoriaDto.nome());
+        categoriaRepository.save(c);
         return ResponseEntity.ok(c);
     }
 

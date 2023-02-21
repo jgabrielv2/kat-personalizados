@@ -87,6 +87,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         p.setDescricao(produtoDto.descricao());
         p.setPreco(produtoDto.preco());
         p.setCategoria(c);
+        produtoRepository.save(p);
         return ResponseEntity.ok(p);
     }
 
