@@ -1,7 +1,6 @@
 package art.katpersonalizados.controller;
 
 import art.katpersonalizados.dto.ProdutoDto;
-import art.katpersonalizados.model.CarrinhoDeCompras;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.ProdutoService;
 import jakarta.validation.Valid;
@@ -16,11 +15,9 @@ import java.util.List;
 public class ProdutoController {
 
     private final ProdutoService produtoService;
-    private final CarrinhoDeCompras carrinhoDeCompras;
 
-    public ProdutoController(ProdutoService produtoService, CarrinhoDeCompras carrinhoDeCompras) {
+    public ProdutoController(ProdutoService produtoService) {
         this.produtoService = produtoService;
-        this.carrinhoDeCompras = carrinhoDeCompras;
     }
 
     @PostMapping
@@ -64,16 +61,4 @@ public class ProdutoController {
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<Produto> adicionarAoCarrinho(Long id, int quantidade) {
-        Produto p = produtoService.buscarPorId(id).getBody();
-        if (p == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        public void removerDoCarrinho (Long id){
-            Produto p = produtoService.buscarPorId(id).getBody();
-            if (p != null) {
-                carrinhoDeCompras.removerItem(p);
-            }
-        }
-    }
+}
