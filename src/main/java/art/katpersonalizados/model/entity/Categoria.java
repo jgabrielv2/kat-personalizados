@@ -1,4 +1,4 @@
-package art.katpersonalizados.model;
+package art.katpersonalizados.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,7 +1,7 @@
 package art.katpersonalizados.controller;
 
 import art.katpersonalizados.dto.ClienteDto;
-import art.katpersonalizados.model.Cliente;
+import art.katpersonalizados.model.entity.Cliente;
 import art.katpersonalizados.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

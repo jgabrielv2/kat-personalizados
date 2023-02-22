@@ -1,7 +1,7 @@
 package art.katpersonalizados.dto;
 
-import art.katpersonalizados.model.Categoria;
-import art.katpersonalizados.model.Produto;
+import art.katpersonalizados.model.entity.Categoria;
+import art.katpersonalizados.model.entity.Produto;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;

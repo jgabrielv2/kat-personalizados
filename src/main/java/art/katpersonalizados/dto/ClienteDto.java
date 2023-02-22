@@ -1,6 +1,6 @@
 package art.katpersonalizados.dto;
 
-import art.katpersonalizados.model.Cliente;
+import art.katpersonalizados.model.entity.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

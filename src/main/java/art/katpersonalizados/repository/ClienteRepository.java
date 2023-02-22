@@ -1,6 +1,6 @@
 package art.katpersonalizados.repository;
 
-import art.katpersonalizados.model.Cliente;
+import art.katpersonalizados.model.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
