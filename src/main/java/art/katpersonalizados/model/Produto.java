@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+@SuppressWarnings("unused")
 @Entity
 public class Produto {
     @Id
@@ -25,6 +26,14 @@ public class Produto {
     @ManyToOne(fetch = FetchType.EAGER)
     private Categoria categoria;
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }
@@ -33,24 +42,17 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public Long getId() {
-        return id;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+    public Long getId() {
+        return id;
     }
 
     @Override
