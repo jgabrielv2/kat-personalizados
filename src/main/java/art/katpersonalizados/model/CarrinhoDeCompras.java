@@ -1,12 +1,17 @@
 package art.katpersonalizados.model;
 
 import art.katpersonalizados.model.entity.Produto;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoDeCompras {
 
     // lista de ItemDoCarrinho que representam os itens do carrinho de compras.
