@@ -1,6 +1,7 @@
 package art.katpersonalizados.controller;
 
 import art.katpersonalizados.dto.CarrinhoDeComprasDto;
+import art.katpersonalizados.dto.RequisicaoItemDoCarrinhoDto;
 import art.katpersonalizados.service.CarrinhoDeComprasService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,31 +20,31 @@ public class CarrinhoDeComprasController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> adicionarItem(@RequestParam Long id, @RequestParam int quantidade){
-        return carrinhoDeComprasService.adicionarItemNoCarrinho(id, quantidade);
+    public ResponseEntity<String> adicionarItem(@RequestBody RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto){
+        return carrinhoDeComprasService.adicionarItemNoCarrinho(requisicaoItemDoCarrinhoDto);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> atualizarItem(@RequestParam Long id, @RequestParam int quantidade){
-        return carrinhoDeComprasService.atualizarQuantidadedoItem(id, quantidade);
+    public ResponseEntity<String> atualizarItem(@RequestBody RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto){
+        return carrinhoDeComprasService.atualizarQuantidadedoItem(requisicaoItemDoCarrinhoDto);
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> removerItem(Long id){
+    @DeleteMapping("/remove")
+    public ResponseEntity<String> removerItem(@RequestParam Long id){
         return carrinhoDeComprasService.removerItemDoCarrinho(id);
     }
 
-    @GetMapping
+    @GetMapping("/view")
     public ResponseEntity<CarrinhoDeComprasDto> mostrarItensNoCarrinho(){
         return carrinhoDeComprasService.getCarrinhoDeCompras();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/clear")
     public ResponseEntity<String> esvaziarCarrinho(){
         return carrinhoDeComprasService.esvaziarCarrinho();
     }
 
-    @GetMapping
+    @GetMapping("/subtotal")
     public ResponseEntity<BigDecimal> mostrarSubTotal(){
         return carrinhoDeComprasService.getSubTotal();
     }

@@ -4,6 +4,7 @@ import art.katpersonalizados.model.ItemDoCarrinho;
 
 import java.math.BigDecimal;
 
+@SuppressWarnings({"ClassHasNoToStringMethod", "unused"})
 public class ItemDoCarrinhoDto {
 
     private Long idProduto;

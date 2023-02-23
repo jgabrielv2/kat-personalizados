@@ -1,6 +1,7 @@
 package art.katpersonalizados.service.impl;
 
 import art.katpersonalizados.dto.CarrinhoDeComprasDto;
+import art.katpersonalizados.dto.RequisicaoItemDoCarrinhoDto;
 import art.katpersonalizados.model.CarrinhoDeCompras;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.CarrinhoDeComprasService;
@@ -24,22 +25,22 @@ public class CarrinhoDeComprasServiceImpl implements CarrinhoDeComprasService {
     }
 
     @Override
-    public ResponseEntity<String> adicionarItemNoCarrinho(Long id, int quantidade) {
-        Produto p = produtoService.buscarPorId(id).getBody();
+    public ResponseEntity<String> adicionarItemNoCarrinho(RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto) {
+        Produto p = produtoService.buscarPorId(requisicaoItemDoCarrinhoDto.getIdProduto()).getBody();
         if (p == null){
             return ResponseEntity.notFound().build();
         }
-        carrinho.adicionaItem(p, quantidade);
+        carrinho.adicionaItem(p, requisicaoItemDoCarrinhoDto.getQuantidade());
         return ResponseEntity.ok("Produto adicionado ao carrinho.");
     }
 
     @Override
-    public ResponseEntity<String> atualizarQuantidadedoItem(Long id, int quantidade) {
-        Produto p = produtoService.buscarPorId(id).getBody();
+    public ResponseEntity<String> atualizarQuantidadedoItem(RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto) {
+        Produto p = produtoService.buscarPorId(requisicaoItemDoCarrinhoDto.getIdProduto()).getBody();
         if (p == null){
             return ResponseEntity.notFound().build();
         }
-        carrinho.atualizarQuantidadeDoItem(p, quantidade);
+        carrinho.atualizarQuantidadeDoItem(p, requisicaoItemDoCarrinhoDto.getQuantidade());
         return ResponseEntity.ok("Quantidade do item atualizada.");
     }
 
