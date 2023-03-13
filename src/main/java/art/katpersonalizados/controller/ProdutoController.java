@@ -3,6 +3,7 @@ package art.katpersonalizados.controller;
 import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
+import art.katpersonalizados.model.dados.listagem.DadosListagemProduto;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.ProdutoService;
 import jakarta.transaction.Transactional;
@@ -42,8 +43,9 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Produto>> buscarTodos() {
-        return produtoService.buscarTodos();
+    public ResponseEntity<List<DadosListagemProduto>> listar() {
+        List<DadosListagemProduto> produtos = produtoService.listar();
+        return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/categoria/{nomeCategoria}")

@@ -3,6 +3,7 @@ package art.katpersonalizados.service;
 import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
+import art.katpersonalizados.model.dados.listagem.DadosListagemProduto;
 import art.katpersonalizados.model.entity.Produto;
 import org.springframework.http.ResponseEntity;
 
@@ -16,7 +17,7 @@ public interface ProdutoService {
 
     ResponseEntity<Produto> buscarPorId (Long id);
 
-    ResponseEntity<List<Produto>> buscarTodos();
+    List<DadosListagemProduto> listar();
 
     ResponseEntity<List<Produto>> buscarPorNomeCategoria(String nome);
 

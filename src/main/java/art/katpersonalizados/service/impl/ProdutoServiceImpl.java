@@ -1,21 +1,20 @@
 package art.katpersonalizados.service.impl;
 
+import art.katpersonalizados.exception.NotFoundException;
 import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
-import art.katpersonalizados.exception.NotFoundException;
+import art.katpersonalizados.model.dados.listagem.DadosListagemProduto;
 import art.katpersonalizados.model.entity.Categoria;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.repository.CategoriaRepository;
 import art.katpersonalizados.repository.ProdutoRepository;
 import art.katpersonalizados.service.ProdutoService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         p.setPreco(dados.preco());
         p.setCategoria(c);
         produtoRepository.save(p);
-        return  new DadosDetalhamentoProduto(p);
+        return new DadosDetalhamentoProduto(p);
     }
 
     @Override
@@ -64,13 +63,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ResponseEntity<List<Produto>> buscarTodos() {
-        List<Produto> produtos = produtoRepository.findAll();
-        if (produtos.isEmpty()) {
-            return ResponseEntity.status(NOT_FOUND).build();
-        } else {
-            return ResponseEntity.ok(produtos);
-        }
+    public List<DadosListagemProduto> listar() {
+        return produtoRepository.findAll().stream().map(DadosListagemProduto::new).toList();
     }
 
     @Override
@@ -87,15 +81,14 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public DadosDetalhamentoProduto atualizar(DadosAtualizacaoProduto dados) {
         Produto p = produtoRepository.getReferenceById(dados.id());
-        Categoria c = categoriaRepository.getReferenceById(dados.idCategoria());
 
-        if(dados.descricao() != null){
+        if (dados.descricao() != null) {
             p.setDescricao(dados.descricao());
         }
-        if(dados.preco() != null){
+        if (dados.preco() != null) {
             p.setPreco(dados.preco());
         }
-        if(dados.idCategoria() != null){
+        if (dados.idCategoria() != null) {
             p.setCategoria(categoriaRepository.getReferenceById(dados.idCategoria()));
         }
 
@@ -105,7 +98,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public void excluir(Long id) {
         if (!produtoRepository.existsById(id)) {
-        throw new NotFoundException("Produto não encontrado com a id " + id);
+            throw new NotFoundException("Produto não encontrado com a id " + id);
         } else {
             produtoRepository.deleteById(id);
         }
