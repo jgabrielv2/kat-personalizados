@@ -1,6 +1,6 @@
 package art.katpersonalizados.controller;
 
-import art.katpersonalizados.dto.CategoriaDto;
+import art.katpersonalizados.model.dados.CategoriaDto;
 import art.katpersonalizados.model.entity.Categoria;
 import art.katpersonalizados.service.CategoriaService;
 import jakarta.validation.Valid;

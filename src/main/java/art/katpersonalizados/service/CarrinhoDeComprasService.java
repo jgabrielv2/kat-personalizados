@@ -1,12 +1,12 @@
 package art.katpersonalizados.service;
 
-import art.katpersonalizados.dto.CarrinhoDeComprasDto;
-import art.katpersonalizados.dto.RequisicaoItemDoCarrinhoDto;
+import art.katpersonalizados.model.dados.CarrinhoDeComprasDto;
+import art.katpersonalizados.model.dados.RequisicaoItemDoCarrinhoDto;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 
-public interface CarrinhoDeComprasService {
+public interface    CarrinhoDeComprasService {
 
     ResponseEntity<String> adicionarItemNoCarrinho(RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto);
 

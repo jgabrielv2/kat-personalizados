@@ -1,12 +1,15 @@
 package art.katpersonalizados.service.impl;
 
-import art.katpersonalizados.dto.ProdutoDto;
+import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
+import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
 import art.katpersonalizados.exception.NotFoundException;
 import art.katpersonalizados.model.entity.Categoria;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.repository.CategoriaRepository;
 import art.katpersonalizados.repository.ProdutoRepository;
 import art.katpersonalizados.service.ProdutoService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,21 +34,16 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
 
+    @Transactional
     @Override
-    public ResponseEntity<Produto> salvar(ProdutoDto produtoDto) {
+    public DadosDetalhamentoProduto salvar(DadosCadastroProduto dados) {
+        Categoria c = categoriaRepository.getReferenceById(dados.idCategoria());
         Produto p = new Produto();
-        return setAtributos(produtoDto, p);
-    }
-
-    @Override
-    public ResponseEntity<List<Produto>> salvarTodos(List<ProdutoDto> produtoDtoList) {
-        List<Produto>produtos = new ArrayList<>();
-        for (ProdutoDto produtoDto : produtoDtoList){
-            Produto p = conversor(produtoDto);
-            produtos.add(p);
-        }
-        List<Produto> produtosSalvos = produtoRepository.saveAll(produtos);
-        return ResponseEntity.ok(produtosSalvos);
+        p.setDescricao(dados.descricao());
+        p.setPreco(dados.preco());
+        p.setCategoria(c);
+        produtoRepository.save(p);
+        return  new DadosDetalhamentoProduto(p);
     }
 
     @Override
@@ -74,11 +72,7 @@ public class ProdutoServiceImpl implements ProdutoService {
             return ResponseEntity.ok(produtos);
         }
     }
-    private Produto conversor(ProdutoDto produtoDto){
-        Produto p = new Produto();
-        BeanUtils.copyProperties(produtoDto, p);
-        return p;
-    }
+
     @Override
     public ResponseEntity<List<Produto>> buscarPorNomeCategoria(String nome) {
         List<Produto> produtos = produtoRepository.findByCategoria_NomeIgnoreCase(nome);
@@ -91,21 +85,21 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public ResponseEntity<Produto> atualizar(Long id, ProdutoDto produtoDto) {
-        Produto p = produtoRepository.findById(id).orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
-        return setAtributos(produtoDto, p);
-    }
+    public DadosDetalhamentoProduto atualizar(DadosAtualizacaoProduto dados) {
+        Produto p = produtoRepository.getReferenceById(dados.id());
+        Categoria c = categoriaRepository.getReferenceById(dados.idCategoria());
 
-    // método interno auxiliar, para salvar e atualizar
-    private ResponseEntity<Produto> setAtributos(ProdutoDto produtoDto, Produto p) {
+        if(dados.descricao() != null){
+            p.setDescricao(dados.descricao());
+        }
+        if(dados.preco() != null){
+            p.setPreco(dados.preco());
+        }
+        if(dados.idCategoria() != null){
+            p.setCategoria(categoriaRepository.getReferenceById(dados.idCategoria()));
+        }
 
-        Categoria c = categoriaRepository.findById(produtoDto.categoria().getId()).orElseThrow(() -> new NotFoundException("Categoria não encontrado!"));
-
-        p.setDescricao(produtoDto.descricao());
-        p.setPreco(produtoDto.preco());
-        p.setCategoria(c);
-        produtoRepository.save(p);
-        return ResponseEntity.ok(p);
+        return new DadosDetalhamentoProduto(p);
     }
 
     @Override

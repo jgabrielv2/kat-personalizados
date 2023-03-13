@@ -1,6 +1,6 @@
 package art.katpersonalizados.service;
 
-import art.katpersonalizados.dto.CategoriaDto;
+import art.katpersonalizados.model.dados.CategoriaDto;
 import art.katpersonalizados.model.entity.Categoria;
 import org.springframework.http.ResponseEntity;
 

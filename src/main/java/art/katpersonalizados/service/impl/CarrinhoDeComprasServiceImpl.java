@@ -1,7 +1,7 @@
 package art.katpersonalizados.service.impl;
 
-import art.katpersonalizados.dto.CarrinhoDeComprasDto;
-import art.katpersonalizados.dto.RequisicaoItemDoCarrinhoDto;
+import art.katpersonalizados.model.dados.CarrinhoDeComprasDto;
+import art.katpersonalizados.model.dados.RequisicaoItemDoCarrinhoDto;
 import art.katpersonalizados.model.CarrinhoDeCompras;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.CarrinhoDeComprasService;

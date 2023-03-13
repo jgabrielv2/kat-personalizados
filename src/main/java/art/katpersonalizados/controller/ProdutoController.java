@@ -1,11 +1,15 @@
 package art.katpersonalizados.controller;
 
-import art.katpersonalizados.dto.ProdutoDto;
+import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
+import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
 import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.ProdutoService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -21,13 +25,10 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody @Valid ProdutoDto produtoDto) {
-        return produtoService.salvar(produtoDto);
-    }
-
-    @PostMapping("/adicionar")
-    public ResponseEntity<List<Produto>> salvarTodos(@RequestBody List<ProdutoDto> produtosDto) {
-        return produtoService.salvarTodos(produtosDto);
+    public ResponseEntity<DadosDetalhamentoProduto> salvar(@RequestBody @Valid DadosCadastroProduto dadosCadastroProduto, UriComponentsBuilder uriComponentsBuilder) {
+        DadosDetalhamentoProduto produto = produtoService.salvar(dadosCadastroProduto);
+        var uri = uriComponentsBuilder.path("/produtos/{id}").buildAndExpand(produto.id()).toUri();
+        return ResponseEntity.created(uri).body(produto);
     }
 
     @GetMapping("/descricao/{descricao}")
@@ -51,11 +52,13 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody @Valid ProdutoDto produtoDto) {
-        return produtoService.atualizar(id, produtoDto);
+    public ResponseEntity<DadosDetalhamentoProduto> atualizar(@RequestBody @Valid DadosAtualizacaoProduto dados) {
+        DadosDetalhamentoProduto produto = produtoService.atualizar(dados);
+        return ResponseEntity.ok(produto);
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         produtoService.excluir(id);
         return ResponseEntity.noContent().build();

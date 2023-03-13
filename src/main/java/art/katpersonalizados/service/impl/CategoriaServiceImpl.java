@@ -1,6 +1,6 @@
 package art.katpersonalizados.service.impl;
 
-import art.katpersonalizados.dto.CategoriaDto;
+import art.katpersonalizados.model.dados.CategoriaDto;
 import art.katpersonalizados.exception.NotFoundException;
 import art.katpersonalizados.model.entity.Categoria;
 import art.katpersonalizados.repository.CategoriaRepository;

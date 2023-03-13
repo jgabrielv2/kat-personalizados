@@ -1,7 +1,7 @@
 package art.katpersonalizados.controller;
 
-import art.katpersonalizados.dto.CarrinhoDeComprasDto;
-import art.katpersonalizados.dto.RequisicaoItemDoCarrinhoDto;
+import art.katpersonalizados.model.dados.CarrinhoDeComprasDto;
+import art.katpersonalizados.model.dados.RequisicaoItemDoCarrinhoDto;
 import art.katpersonalizados.service.CarrinhoDeComprasService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

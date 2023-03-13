@@ -1,4 +1,4 @@
-package art.katpersonalizados.dto;
+package art.katpersonalizados.model.dados;
 
 import art.katpersonalizados.model.entity.Endereco;
 import jakarta.validation.constraints.NotBlank;

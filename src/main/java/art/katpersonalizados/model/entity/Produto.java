@@ -23,15 +23,27 @@ public class Produto {
     private BigDecimal preco;
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
+
+    public Produto() {
+
+    }
 
     public String getDescricao() {
         return descricao;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public BigDecimal getPreco() {
         return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
     public Categoria getCategoria() {
@@ -42,18 +54,10 @@ public class Produto {
         this.categoria = categoria;
     }
 
-
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public Long getId() {
         return id;
     }
+
 
     @Override
     public String toString() {
