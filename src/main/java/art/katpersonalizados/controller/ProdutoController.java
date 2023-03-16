@@ -4,7 +4,6 @@ import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
 import art.katpersonalizados.model.dados.listagem.DadosListagemProduto;
-import art.katpersonalizados.model.entity.Produto;
 import art.katpersonalizados.service.ProdutoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -33,13 +32,15 @@ public class ProdutoController {
     }
 
     @GetMapping("/descricao/{descricao}")
-    public ResponseEntity<List<Produto>> buscarPorDescricao(@PathVariable String descricao) {
-        return produtoService.buscarPorDescricao(descricao);
+    public ResponseEntity<List<DadosListagemProduto>> listarPorDescricao(@PathVariable String descricao) {
+        List<DadosListagemProduto> produtos = produtoService.listarPorDescricao(descricao);
+        return ResponseEntity.ok(produtos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
-        return produtoService.buscarPorId(id);
+    public ResponseEntity<DadosDetalhamentoProduto> detalhar(@PathVariable Long id) {
+        DadosDetalhamentoProduto produto = produtoService.detalhar(id);
+        return ResponseEntity.ok(produto);
     }
 
     @GetMapping
@@ -49,8 +50,9 @@ public class ProdutoController {
     }
 
     @GetMapping("/categoria/{nomeCategoria}")
-    public ResponseEntity<List<Produto>> buscarPorNomeDaCategoria(@PathVariable String nomeCategoria) {
-        return produtoService.buscarPorNomeCategoria(nomeCategoria);
+    public ResponseEntity<List<DadosListagemProduto>> buscarPorNomeDaCategoria(@PathVariable String nomeCategoria) {
+        List<DadosListagemProduto> produtos = produtoService.listarPorNomeCategoria(nomeCategoria);
+        return ResponseEntity.ok(produtos);
     }
 
     @PutMapping("/{id}")

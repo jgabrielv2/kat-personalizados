@@ -26,6 +26,8 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
+    private boolean ativo;
+
     public Produto() {
 
     }
@@ -58,6 +60,14 @@ public class Produto {
         return id;
     }
 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public boolean getAtivo(){
+        return ativo;
+    }
+
 
     @Override
     public String toString() {
@@ -66,6 +76,7 @@ public class Produto {
                 ", descricao='" + descricao + '\'' +
                 ", preco=" + preco +
                 ", categoria=" + categoria +
+                ", ativo=" + ativo +
                 '}';
     }
 }

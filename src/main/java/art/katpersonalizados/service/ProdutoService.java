@@ -4,24 +4,23 @@ import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoProduto;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroProduto;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoProduto;
 import art.katpersonalizados.model.dados.listagem.DadosListagemProduto;
-import art.katpersonalizados.model.entity.Produto;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface ProdutoService {
 
-    DadosDetalhamentoProduto salvar (DadosCadastroProduto dados);
+    DadosDetalhamentoProduto salvar(DadosCadastroProduto dados);
 
-    ResponseEntity<List<Produto>> buscarPorDescricao (String descricao);
-
-    ResponseEntity<Produto> buscarPorId (Long id);
+    DadosDetalhamentoProduto detalhar(Long id);
 
     List<DadosListagemProduto> listar();
 
-    ResponseEntity<List<Produto>> buscarPorNomeCategoria(String nome);
+    List<DadosListagemProduto> listarPorDescricao(String descricao);
 
-    DadosDetalhamentoProduto atualizar (DadosAtualizacaoProduto dados);
+    List<DadosListagemProduto> listarPorNomeCategoria(String nome);
+
+
+    DadosDetalhamentoProduto atualizar(DadosAtualizacaoProduto dados);
 
     void excluir(Long id);
 

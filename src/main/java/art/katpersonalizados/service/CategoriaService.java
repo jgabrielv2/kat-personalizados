@@ -1,22 +1,23 @@
 package art.katpersonalizados.service;
 
-import art.katpersonalizados.model.dados.CategoriaDto;
-import art.katpersonalizados.model.entity.Categoria;
-import org.springframework.http.ResponseEntity;
+import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoCategoria;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroCategoria;
+import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoCategoria;
+import art.katpersonalizados.model.dados.listagem.DadosListagemCategoria;
 
 import java.util.List;
 
 public interface CategoriaService {
 
-    ResponseEntity<Categoria> salvar(CategoriaDto categoriaDto);
+    DadosDetalhamentoCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria);
 
-    ResponseEntity<Categoria> buscarPorId(Long id);
+    DadosDetalhamentoCategoria detalhar(Long id);
 
-    ResponseEntity<Categoria> buscarPorNome(String nome);
+    DadosDetalhamentoCategoria detalharPorNome(String nome);
 
-    ResponseEntity<List<Categoria>> buscarTodos();
+    List<DadosListagemCategoria> listar();
 
-    ResponseEntity<Categoria> atualizar(Long id, CategoriaDto categoriaDto);
+    DadosDetalhamentoCategoria atualizar(DadosAtualizacaoCategoria dados);
 
     void excluir(Long id);
 }

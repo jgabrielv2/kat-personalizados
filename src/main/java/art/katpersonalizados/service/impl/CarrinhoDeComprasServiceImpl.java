@@ -1,11 +1,11 @@
 package art.katpersonalizados.service.impl;
 
+import art.katpersonalizados.model.CarrinhoDeCompras;
 import art.katpersonalizados.model.dados.CarrinhoDeComprasDto;
 import art.katpersonalizados.model.dados.RequisicaoItemDoCarrinhoDto;
-import art.katpersonalizados.model.CarrinhoDeCompras;
 import art.katpersonalizados.model.entity.Produto;
+import art.katpersonalizados.repository.ProdutoRepository;
 import art.katpersonalizados.service.CarrinhoDeComprasService;
-import art.katpersonalizados.service.ProdutoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +17,17 @@ public class CarrinhoDeComprasServiceImpl implements CarrinhoDeComprasService {
 
     private final CarrinhoDeCompras carrinho;
 
-    private final ProdutoService produtoService;
+    private final ProdutoRepository produtoRepository;
 
-    public CarrinhoDeComprasServiceImpl(CarrinhoDeCompras carrinho, ProdutoService produtoService){
+    public CarrinhoDeComprasServiceImpl(CarrinhoDeCompras carrinho, ProdutoRepository produtoRepository) {
         this.carrinho = carrinho;
-        this.produtoService = produtoService;
+        this.produtoRepository = produtoRepository;
     }
 
     @Override
     public ResponseEntity<String> adicionarItemNoCarrinho(RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto) {
-        Produto p = produtoService.buscarPorId(requisicaoItemDoCarrinhoDto.getIdProduto()).getBody();
-        if (p == null){
+        Produto p = produtoRepository.getReferenceById(requisicaoItemDoCarrinhoDto.getIdProduto());
+        if (p == null) {
             return ResponseEntity.notFound().build();
         }
         carrinho.adicionaItem(p, requisicaoItemDoCarrinhoDto.getQuantidade());
@@ -36,8 +36,8 @@ public class CarrinhoDeComprasServiceImpl implements CarrinhoDeComprasService {
 
     @Override
     public ResponseEntity<String> atualizarQuantidadedoItem(RequisicaoItemDoCarrinhoDto requisicaoItemDoCarrinhoDto) {
-        Produto p = produtoService.buscarPorId(requisicaoItemDoCarrinhoDto.getIdProduto()).getBody();
-        if (p == null){
+        Produto p = produtoRepository.findById(requisicaoItemDoCarrinhoDto.getIdProduto()).get();
+        if (p == null) {
             return ResponseEntity.notFound().build();
         }
         carrinho.atualizarQuantidadeDoItem(p, requisicaoItemDoCarrinhoDto.getQuantidade());
@@ -46,8 +46,8 @@ public class CarrinhoDeComprasServiceImpl implements CarrinhoDeComprasService {
 
     @Override
     public ResponseEntity<String> removerItemDoCarrinho(Long id) {
-        Produto p = produtoService.buscarPorId(id).getBody();
-        if (p == null){
+        Produto p = produtoRepository.findById(id).get();
+        if (p == null) {
             return ResponseEntity.notFound().build();
         }
         carrinho.removerItem(p);

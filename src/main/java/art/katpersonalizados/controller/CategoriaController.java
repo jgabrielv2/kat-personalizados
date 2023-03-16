@@ -1,11 +1,14 @@
 package art.katpersonalizados.controller;
 
-import art.katpersonalizados.model.dados.CategoriaDto;
-import art.katpersonalizados.model.entity.Categoria;
+import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoCategoria;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroCategoria;
+import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoCategoria;
+import art.katpersonalizados.model.dados.listagem.DadosListagemCategoria;
 import art.katpersonalizados.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -16,32 +19,37 @@ public class CategoriaController {
 
     private final CategoriaService categoriaService;
 
-    public CategoriaController(CategoriaService categoriaService){
+    public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> salvar(@RequestBody @Valid CategoriaDto categoriaDto){
-        return categoriaService.salvar(categoriaDto);
+    public ResponseEntity<DadosDetalhamentoCategoria> salvar(@RequestBody @Valid DadosCadastroCategoria dadosCadastroCategoria, UriComponentsBuilder uriComponentsBuilder) {
+        DadosDetalhamentoCategoria categoria = categoriaService.salvar(dadosCadastroCategoria);
+        var uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.id()).toUri();
+        return ResponseEntity.created(uri).body(categoria);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarPorId(@PathVariable Long id){
-        return categoriaService.buscarPorId(id);
+    public ResponseEntity<DadosDetalhamentoCategoria> buscarPorId(@PathVariable Long id) {
+        DadosDetalhamentoCategoria categoria = categoriaService.detalhar(id);
+        return ResponseEntity.ok(categoria);
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> buscarTodos(){
-        return categoriaService.buscarTodos();
+    public ResponseEntity<List<DadosListagemCategoria>> listar() {
+        List<DadosListagemCategoria> categorias = categoriaService.listar();
+        return ResponseEntity.ok(categorias);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Categoria> atualizar (@PathVariable Long id, @RequestBody @Valid CategoriaDto categoriaDto){
-        return categoriaService.atualizar(id, categoriaDto);
+    @PutMapping
+    public ResponseEntity<DadosDetalhamentoCategoria> atualizar(@RequestBody @Valid DadosAtualizacaoCategoria dados) {
+        DadosDetalhamentoCategoria categoria = categoriaService.atualizar(dados);
+        return ResponseEntity.ok(categoria);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id){
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
         categoriaService.excluir(id);
         return ResponseEntity.noContent().build();
     }

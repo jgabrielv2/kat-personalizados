@@ -11,5 +11,5 @@ import java.math.BigDecimal;
  * A DTO for the {@link Produto} entity
  */
 public record DadosCadastroProduto(@NotBlank String descricao, @NotNull @Positive BigDecimal preco,
-                                   @NotBlank Long idCategoria) {
+                                   @NotNull Long idCategoria) {
 }
