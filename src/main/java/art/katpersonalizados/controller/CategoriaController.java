@@ -24,8 +24,8 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<DadosDetalhamentoCategoria> salvar(@RequestBody @Valid DadosCadastroCategoria dadosCadastroCategoria, UriComponentsBuilder uriComponentsBuilder) {
-        DadosDetalhamentoCategoria categoria = categoriaService.salvar(dadosCadastroCategoria);
+    public ResponseEntity<DadosListagemCategoria> salvar(@RequestBody @Valid DadosCadastroCategoria dadosCadastroCategoria, UriComponentsBuilder uriComponentsBuilder) {
+        DadosListagemCategoria categoria = categoriaService.salvar(dadosCadastroCategoria);
         var uri = uriComponentsBuilder.path("/categorias/{id}").buildAndExpand(categoria.id()).toUri();
         return ResponseEntity.created(uri).body(categoria);
     }

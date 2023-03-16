@@ -24,11 +24,11 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public DadosDetalhamentoCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria) {
+    public DadosListagemCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria) {
         Categoria c = new Categoria();
         c.setNome(dadosCadastroCategoria.nome());
         categoriaRepository.save(c);
-        return new DadosDetalhamentoCategoria(c);
+        return new DadosListagemCategoria(c);
     }
 
     @Override

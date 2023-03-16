@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CategoriaService {
 
-    DadosDetalhamentoCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria);
+    DadosListagemCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria);
 
     DadosDetalhamentoCategoria detalhar(Long id);
 
