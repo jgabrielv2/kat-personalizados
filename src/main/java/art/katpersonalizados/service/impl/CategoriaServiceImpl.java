@@ -1,6 +1,5 @@
 package art.katpersonalizados.service.impl;
 
-import art.katpersonalizados.exception.NotFoundException;
 import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoCategoria;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroCategoria;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoCategoria;
@@ -59,10 +58,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public void excluir(Long id) {
-        if (!categoriaRepository.existsById(id)) {
-            throw new NotFoundException("Categoria não encontrada com a id" + id);
-        } else {
-            categoriaRepository.deleteById(id);
-        }
+        Categoria c = categoriaRepository.getReferenceById(id);
+        c.setAtivo(false);
     }
 }

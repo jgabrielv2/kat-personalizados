@@ -6,8 +6,9 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-@SuppressWarnings("unused")
+
 @Entity
+@Table(name = "produtos")
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,7 +65,7 @@ public class Produto {
         this.ativo = ativo;
     }
 
-    public boolean getAtivo(){
+    public boolean isAtivo(){
         return ativo;
     }
 

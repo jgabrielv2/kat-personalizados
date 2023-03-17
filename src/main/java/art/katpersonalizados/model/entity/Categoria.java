@@ -8,6 +8,7 @@ import java.util.Objects;
 
 
 @Entity
+@Table(name = "categorias")
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +18,16 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     private List<Produto> produto;
+
+    private boolean ativo;
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
 
     public String getNome() {
         return nome;
@@ -60,6 +71,7 @@ public class Categoria {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", produto=" + produto +
+                ", ativo=" + ativo +
                 '}';
     }
 }

@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @SuppressWarnings("unused")
 @Entity
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
