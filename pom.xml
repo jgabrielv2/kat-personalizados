@@ -5,13 +5,12 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>art.katpersonalizados</groupId>
 	<artifactId>katpersonalizados</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>katpersonalizados</name>
 	<description>Kat Personalizados Online Store</description>
 	<properties>
@@ -34,13 +33,13 @@
 		<dependency>
 			<groupId>com.googlecode.libphonenumber</groupId>
 			<artifactId>libphonenumber</artifactId>
-			<version>8.13.6</version>
+			<version>8.13.7</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.0.2</version>
+			<version>2.0.4</version>
 		</dependency>
 
 
