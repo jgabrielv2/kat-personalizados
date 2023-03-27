@@ -1,35 +1,22 @@
 package art.katpersonalizados.model.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.Embeddable;
 
 @SuppressWarnings("unused")
 @Embeddable
 public class Endereco {
 
 
-    @NotBlank
     private String cep;
 
-    @NotBlank
-    @Size(max = 100)
     private String logradouro;
 
-    @NotBlank
-    @Size(max = 100)
     private String complemento;
 
-    @NotBlank
-    @Size(max = 20)
     private String bairro;
 
-    @NotBlank
-    @Size(max = 20)
     private String localidade;
 
-    @NotBlank
-    @Size(max = 20)
     private String uf;
 
     public String getCep() {

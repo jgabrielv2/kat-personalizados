@@ -27,7 +27,7 @@ public class ProdutoController {
     @PostMapping
     public ResponseEntity<DadosDetalhamentoProduto> salvar(@RequestBody @Valid DadosCadastroProduto dadosCadastroProduto, UriComponentsBuilder uriComponentsBuilder) {
         DadosDetalhamentoProduto produto = produtoService.salvar(dadosCadastroProduto);
-        var uri = uriComponentsBuilder.path("/produtos/{id}").buildAndExpand(produto.id()).toUri();
+        var uri = uriComponentsBuilder.path("/produtos/{idProduto}").buildAndExpand(produto.id()).toUri();
         return ResponseEntity.created(uri).body(produto);
     }
 
@@ -55,7 +55,7 @@ public class ProdutoController {
         return ResponseEntity.ok(produtos);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<DadosDetalhamentoProduto> atualizar(@RequestBody @Valid DadosAtualizacaoProduto dados) {
         DadosDetalhamentoProduto produto = produtoService.atualizar(dados);
         return ResponseEntity.ok(produto);

@@ -1,11 +1,8 @@
 package art.katpersonalizados.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-
 
 @Entity
 @Table(name = "produtos")
@@ -15,15 +12,12 @@ public class Produto {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
     @Column(name = "descricao")
     private String descricao;
 
-    @NotNull
     @Column(name = "preco", precision = 19, scale = 2)
     private BigDecimal preco;
 
-    @Valid
     @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
@@ -61,19 +55,18 @@ public class Produto {
         return id;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
-    public boolean isAtivo(){
-        return ativo;
-    }
-
-
     @Override
     public String toString() {
         return "Produto{" +
-                "id=" + id +
+                "idProduto=" + id +
                 ", descricao='" + descricao + '\'' +
                 ", preco=" + preco +
                 ", categoria=" + categoria +

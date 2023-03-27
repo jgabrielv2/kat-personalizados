@@ -64,7 +64,7 @@ public class CarrinhoDeCompras {
     public void atualizarQuantidadeDoItem(Produto p, int quantidade) {
         for (ItemDoCarrinho item : itens) {
 
-            // percorre a lista de itens, verificando se há algum produto com o id do produto passado como parâmetro
+            // percorre a lista de itens, verificando se há algum produto com o idProduto do produto passado como parâmetro
             if (item.getProduto().getId().equals(p.getId())) {
                 item.setQuantidade(quantidade);
                 return;

@@ -1,12 +1,6 @@
 package art.katpersonalizados.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.br.CPF;
 
 @SuppressWarnings("unused")
 @Entity
@@ -17,31 +11,21 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 100)
     private String nome;
 
-    @NotBlank
-    @Size(max = 100)
     private String sobrenome;
 
-    @NotBlank
-    @Pattern(regexp = "\\(\\d{2}\\)\\d{5}-\\d{4}", message = "O número de telefone deve estar no formato (XX)XXXXX-XXXX")
     private String telefone;
 
-    @NotBlank
-    @Email
-    @Size(max = 100)
     private String email;
 
-    @Valid
     @Embedded
     private Endereco endereco;
 
-    @NotBlank
-    @CPF
-    @Pattern(regexp = "\\d{11}")
     private String cpf;
+
+    public Cliente() {
+    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -51,25 +35,38 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-
-    public Cliente() {
-    }
-
     public String getSobrenome() {
         return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getCpf() {
         return cpf;
     }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -86,26 +83,10 @@ public class Cliente {
         this.id = id;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     @Override
     public String toString() {
         return "Cliente{" +
-                "id=" + id +
+                "idProduto=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
                 ", telefone='" + telefone + '\'' +

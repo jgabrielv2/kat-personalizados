@@ -65,11 +65,11 @@ public class ClienteServiceImpl implements ClienteService {
         return optionalCliente.map(ResponseEntity::ok).orElseThrow(() -> new NotFoundException("Cliente não encontrado com o CPF informado."));
     }
 
-    // Busca um Cliente, dado o id informado. Se não houver, é lançada uma NotFoundException
+    // Busca um Cliente, dado o idProduto informado. Se não houver, é lançada uma NotFoundException
     @Override
     public ResponseEntity<Cliente> buscarPorId(Long id) {
         Optional<Cliente> optionalCliente = clienteRepository.findById(id);
-        return optionalCliente.map(ResponseEntity::ok).orElseThrow(() -> new NotFoundException("Cliente não encontrado com o id " + id));
+        return optionalCliente.map(ResponseEntity::ok).orElseThrow(() -> new NotFoundException("Cliente não encontrado com o idProduto " + id));
     }
 
     // Lista de Clientes cadastrados. Se não houver, retorna o HTTP status Not Found
@@ -82,10 +82,10 @@ public class ClienteServiceImpl implements ClienteService {
         return ResponseEntity.ok(clientes);
     }
 
-    // Atualiza o Cliente, dado o id informado.
+    // Atualiza o Cliente, dado o idProduto informado.
     @Override
     public ResponseEntity<Cliente> atualizar(Long id, ClienteDto clienteDto) {
-        Cliente c = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Cliente não encontrado com a id " + id));
+        Cliente c = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException("Cliente não encontrado com a idProduto " + id));
 
         String telefone = clienteDto.telefone();
         if (!TelefoneValidator.isValid(telefone)) {
@@ -116,7 +116,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void excluir(Long id) {
         if (!clienteRepository.existsById(id)) {
-            throw new NotFoundException("Cliente não encontrado com a id " + id);
+            throw new NotFoundException("Cliente não encontrado com a idProduto " + id);
         } else {
             clienteRepository.deleteById(id);
         }

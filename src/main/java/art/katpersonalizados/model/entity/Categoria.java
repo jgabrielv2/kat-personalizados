@@ -1,7 +1,6 @@
 package art.katpersonalizados.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +12,7 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
@@ -21,12 +20,12 @@ public class Categoria {
 
     private boolean ativo;
 
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
     public boolean isAtivo() {
         return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public String getNome() {
@@ -68,7 +67,7 @@ public class Categoria {
     @Override
     public String toString() {
         return "Categoria{" +
-                "id=" + id +
+                "idProduto=" + id +
                 ", nome='" + nome + '\'' +
                 ", produto=" + produto +
                 ", ativo=" + ativo +

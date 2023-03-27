@@ -63,7 +63,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Transactional
     @Override
     public DadosDetalhamentoProduto atualizar(DadosAtualizacaoProduto dados) {
-        Produto p = produtoRepository.getReferenceById(dados.id());
+        Produto p = produtoRepository.getReferenceById(dados.idProduto());
 
         if (dados.descricao() != null) {
             p.setDescricao(dados.descricao());
