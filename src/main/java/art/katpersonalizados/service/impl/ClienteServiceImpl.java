@@ -54,19 +54,13 @@ public class ClienteServiceImpl implements ClienteService {
     public DadosDetalhamentoCliente atualizar(DadosAtualizacaoCliente dados) {
         Cliente c = clienteRepository.findById(dados.idCliente()).orElseThrow(EntityNotFoundException::new);
 
-        if (dados.username() != null)
-            c.setUsername(dados.username());
-        if (dados.dadosPessoais().firstName() != null)
-            c.getDadosPessoais().setFirstName(dados.dadosPessoais().firstName());
-        if (dados.dadosPessoais().lastName() != null)
-            c.getDadosPessoais().setLastName(dados.dadosPessoais().lastName());
-        if (dados.dadosPessoais().email() != null)
-            c.getDadosPessoais().setEmail(dados.dadosPessoais().email());
-        if (dados.dadosPessoais().telefone() != null)
-            c.getDadosPessoais().setTelefone(dados.dadosPessoais().telefone());
-        if (dados.dadosPessoais().celular() != null)
-            c.getDadosPessoais().setCelular(dados.dadosPessoais().celular());
+        atualizarDadosPessoaisCliente(dados, c);
+        atualizarEnderecoCliente(dados, c);
 
+        return new DadosDetalhamentoCliente(c);
+    }
+
+    private static void atualizarEnderecoCliente(DadosAtualizacaoCliente dados, Cliente c) {
         if (dados.endereco().cep() != null)
             c.getEndereco().setCep(dados.endereco().cep());
         if (dados.endereco().logradouro() != null)
@@ -81,9 +75,17 @@ public class ClienteServiceImpl implements ClienteService {
             c.getEndereco().setUf(dados.endereco().uf());
         if (dados.endereco().numero() != null)
             c.getEndereco().setNumero(dados.endereco().numero());
+    }
 
-
-        return new DadosDetalhamentoCliente(c);
+    private static void atualizarDadosPessoaisCliente(DadosAtualizacaoCliente dados, Cliente c) {
+        if (dados.username() != null)
+            c.setUsername(dados.username());
+        if (dados.dadosPessoais().email() != null)
+            c.getDadosPessoais().setEmail(dados.dadosPessoais().email());
+        if (dados.dadosPessoais().telefone() != null)
+            c.getDadosPessoais().setTelefone(dados.dadosPessoais().telefone());
+        if (dados.dadosPessoais().celular() != null)
+            c.getDadosPessoais().setCelular(dados.dadosPessoais().celular());
     }
 
     @Transactional

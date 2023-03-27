@@ -15,7 +15,7 @@ public class SpringDocConfiguration {
         return new OpenAPI()
                 .info(new Info()
                         .title("Kat Personalizados API")
-                        .description("API Rest da aplicação Kat Personalizados, contendo as funcionalidades de CRUD de produtos e categorias")
+                        .description("API Rest da aplicação Kat Personalizados, contendo as funcionalidades de CRUD de produtos, categorias, clientes e pedidos")
                         .contact(new Contact()
                                 .name("jgabrielv")
                                 .email("joao.vidal@aluno.unb.br"))
