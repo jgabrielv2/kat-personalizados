@@ -1,5 +1,6 @@
 package art.katpersonalizados.model.entity;
 
+import art.katpersonalizados.model.dados.DadosEndereco;
 import jakarta.persistence.Embeddable;
 
 @SuppressWarnings("unused")
@@ -18,6 +19,23 @@ public class Endereco {
     private String localidade;
 
     private String uf;
+
+    private String numero;
+
+    public Endereco(DadosEndereco dados) {
+        this.cep = dados.cep();
+        this.logradouro = dados.logradouro();
+        this.complemento = dados.complemento();
+        this.bairro = dados.bairro();
+        this.localidade = dados.localidade();
+        this.uf = dados.uf();
+        this.numero = dados.numero();
+    }
+
+    public Endereco() {
+
+    }
+
 
     public String getCep() {
         return cep;
@@ -67,6 +85,14 @@ public class Endereco {
         this.uf = uf;
     }
 
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
     @Override
     public String toString() {
         return "Endereco{" +
@@ -76,6 +102,7 @@ public class Endereco {
                 ", bairro='" + bairro + '\'' +
                 ", localidade='" + localidade + '\'' +
                 ", uf='" + uf + '\'' +
+                ", numero='" + numero + '\'' +
                 '}';
     }
 }

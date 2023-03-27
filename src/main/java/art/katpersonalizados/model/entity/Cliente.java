@@ -1,9 +1,11 @@
 package art.katpersonalizados.model.entity;
 
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroCliente;
 import jakarta.persistence.*;
 
-@SuppressWarnings("unused")
-@Entity
+import java.util.Objects;
+
+@Entity(name = "Cliente")
 @Table(name = "clientes")
 public class Cliente {
 
@@ -11,20 +13,46 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String username;
 
-    private String sobrenome;
-
-    private String telefone;
-
-    private String email;
+    @Embedded
+    private DadosPessoais dadosPessoais;
 
     @Embedded
     private Endereco endereco;
 
-    private String cpf;
+    private Boolean ativo;
+
+
+    public Cliente(DadosCadastroCliente dados) {
+        this.ativo = true;
+        this.username = dados.username();
+        this.dadosPessoais = new DadosPessoais(dados.dadosPessoais());
+        this.endereco = new Endereco(dados.endereco());
+    }
 
     public Cliente() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public DadosPessoais getDadosPessoais() {
+        return dadosPessoais;
+    }
+
+    public void setDadosPessoais(DadosPessoais dadosPessoais) {
+        this.dadosPessoais = dadosPessoais;
     }
 
     public Endereco getEndereco() {
@@ -35,64 +63,35 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
+    public Boolean isAtivo() {
+        return ativo;
     }
 
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 
-    public String getTelefone() {
-        return telefone;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente cliente)) return false;
+
+        return Objects.equals(id, cliente.id);
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
-                "idProduto=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", email='" + email + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", dadosPessoais=" + dadosPessoais +
                 ", endereco=" + endereco +
-                ", cpf='" + cpf + '\'' +
+                ", ativo=" + ativo +
                 '}';
     }
 }

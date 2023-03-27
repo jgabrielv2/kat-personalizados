@@ -1,22 +1,23 @@
 package art.katpersonalizados.service;
 
-import art.katpersonalizados.model.entity.Cliente;
-import art.katpersonalizados.model.dados.ClienteDto;
-import org.springframework.http.ResponseEntity;
+import art.katpersonalizados.model.dados.atualizacao.DadosAtualizacaoCliente;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroCliente;
+import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoCliente;
+import art.katpersonalizados.model.dados.listagem.DadosListagemCliente;
 
 import java.util.List;
 
 public interface ClienteService {
 
-    ResponseEntity<Cliente> salvar(ClienteDto clienteDto);
+    DadosDetalhamentoCliente salvar(DadosCadastroCliente dados);
 
-    ResponseEntity<Cliente> buscarPorCpf(String cpf);
+    DadosDetalhamentoCliente buscarPorCpf(String cpf);
 
-    ResponseEntity<Cliente> buscarPorId(Long id);
+    DadosDetalhamentoCliente buscarPorId(Long id);
 
-    ResponseEntity<List<Cliente>> buscarTodos();
+    List<DadosListagemCliente> buscarTodos();
 
-    ResponseEntity<Cliente> atualizar(Long id, ClienteDto clienteDto);
+    DadosDetalhamentoCliente atualizar(DadosAtualizacaoCliente dados);
 
     void excluir(Long id);
 
