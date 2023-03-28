@@ -44,7 +44,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public List<DadosListagemCategoria> listar() {
-        return categoriaRepository.findAll().stream().map(DadosListagemCategoria::new).toList();
+        return categoriaRepository.findByAtivoTrue().stream().map(DadosListagemCategoria::new).toList();
     }
 
 

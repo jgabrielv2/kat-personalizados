@@ -46,7 +46,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<DadosListagemCliente> buscarTodos() {
-        return clienteRepository.findAll().stream().map(DadosListagemCliente::new).toList();
+        return clienteRepository.findByAtivoTrue().stream().map(DadosListagemCliente::new).toList();
     }
 
     @Transactional

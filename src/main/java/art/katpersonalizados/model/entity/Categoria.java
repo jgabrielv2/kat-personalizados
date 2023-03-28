@@ -1,5 +1,6 @@
 package art.katpersonalizados.model.entity;
 
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroCategoria;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,6 +20,14 @@ public class Categoria {
     private List<Produto> produto;
 
     private boolean ativo;
+
+    public Categoria() {
+    }
+
+    public Categoria(DadosCadastroCategoria dados){
+        this.nome = dados.nome();
+        this.ativo = true;
+    }
 
     public boolean isAtivo() {
         return ativo;
