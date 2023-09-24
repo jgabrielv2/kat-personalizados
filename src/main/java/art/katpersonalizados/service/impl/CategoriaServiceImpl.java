@@ -37,16 +37,9 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public DadosDetalhamentoCategoria detalharPorNome(String nome) {
-        Categoria c = categoriaRepository.findByNomeIgnoreCase(nome);
-        return new DadosDetalhamentoCategoria(c);
-    }
-
-    @Override
     public List<DadosListagemCategoria> listar() {
         return categoriaRepository.findByAtivoTrue().stream().map(DadosListagemCategoria::new).toList();
     }
-
 
     @Override
     public DadosDetalhamentoCategoria atualizar(DadosAtualizacaoCategoria dados) {

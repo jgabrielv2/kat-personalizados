@@ -13,8 +13,6 @@ public interface CategoriaService {
 
     DadosDetalhamentoCategoria detalhar(Long id);
 
-    DadosDetalhamentoCategoria detalharPorNome(String nome);
-
     List<DadosListagemCategoria> listar();
 
     DadosDetalhamentoCategoria atualizar(DadosAtualizacaoCategoria dados);
