@@ -3,7 +3,7 @@ package art.katpersonalizados.model.entity;
 import art.katpersonalizados.model.dados.DadosEndereco;
 import jakarta.persistence.Embeddable;
 
-@SuppressWarnings("unused")
+
 @Embeddable
 public class Endereco {
 

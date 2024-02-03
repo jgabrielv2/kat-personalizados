@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@SuppressWarnings("ClassHasNoToStringMethod")
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
 

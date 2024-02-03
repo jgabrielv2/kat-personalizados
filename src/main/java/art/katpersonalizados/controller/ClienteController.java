@@ -12,7 +12,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
-@SuppressWarnings("ClassHasNoToStringMethod")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
