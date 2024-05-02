@@ -18,7 +18,7 @@ public class Cliente {
     @Embedded
     private DadosPessoais dadosPessoais;
 
-    @Embedded
+    @ManyToOne
     private Endereco endereco;
 
     private Boolean ativo;
