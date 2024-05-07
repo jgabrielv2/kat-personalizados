@@ -2,17 +2,31 @@ package art.katpersonalizados.model.entity;
 
 import art.katpersonalizados.model.dados.DadosPessoaisDto;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 @Embeddable
 public class DadosPessoais {
 
+    @Size(min = 2, max = 50)
     private String firstName;
+
+    @Size(min = 2, max = 50)
     private String lastName;
+
+//    @Size(min = 2, max = 50)
+    @Email
     private String email;
+
+    @Size(min = 11, max = 11)
     private String cpf;
+
+    @Size(min = 10, max = 20)
     private String telefone;
+
+    @Size(min = 11, max = 20)
     private String celular;
     private LocalDate dataNascimento;
 

@@ -7,6 +7,6 @@ import java.util.List;
 public record DadosDetalhamentoCategoria(Long id, String nome, List<DadosDetalhamentoProduto> produtos) {
 
     public DadosDetalhamentoCategoria(Categoria c){
-        this(c.getId(), c.getNome(), c.getProduto().stream().map(DadosDetalhamentoProduto::new).toList());
+        this(c.getId(), c.getNome(), c.getProdutos().stream().map(DadosDetalhamentoProduto::new).toList());
     }
 }

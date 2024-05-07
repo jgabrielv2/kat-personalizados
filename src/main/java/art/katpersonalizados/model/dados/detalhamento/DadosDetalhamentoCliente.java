@@ -4,10 +4,12 @@ import art.katpersonalizados.model.entity.Cliente;
 import art.katpersonalizados.model.entity.DadosPessoais;
 import art.katpersonalizados.model.entity.Endereco;
 
-public record DadosDetalhamentoCliente(Long id, String username, DadosPessoais dadosPessoais, Endereco endereco) {
+import java.util.List;
+
+public record DadosDetalhamentoCliente(Long id, String username, DadosPessoais dadosPessoais, List<Endereco> enderecos) {
 
     public DadosDetalhamentoCliente(Cliente c){
-        this(c.getId(), c.getUsername(), c.getDadosPessoais(), c.getEndereco());
+        this(c.getId(), c.getUsername(), c.getDadosPessoais(), c.getEnderecos());
     }
 
 }

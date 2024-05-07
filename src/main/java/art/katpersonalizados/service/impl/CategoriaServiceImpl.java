@@ -24,8 +24,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public DadosListagemCategoria salvar(DadosCadastroCategoria dadosCadastroCategoria) {
-        Categoria c = new Categoria();
-        c.setNome(dadosCadastroCategoria.nome());
+        Categoria c = new Categoria(dadosCadastroCategoria);
         categoriaRepository.save(c);
         return new DadosListagemCategoria(c);
     }

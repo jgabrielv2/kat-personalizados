@@ -13,6 +13,6 @@ import java.time.LocalDate;
  */
 public record DadosPessoaisDto(@NotBlank String firstName, @NotBlank String lastName,
                                @Email String email, @CPF String cpf,
-                               @NotBlank String telefone,
+                               String telefone,
                                @NotBlank String celular, @NotNull LocalDate dataNascimento) implements Serializable {
 }

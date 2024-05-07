@@ -5,6 +5,7 @@ import art.katpersonalizados.model.dados.cadastro.DadosCadastroCliente;
 import art.katpersonalizados.model.dados.detalhamento.DadosDetalhamentoCliente;
 import art.katpersonalizados.model.dados.listagem.DadosListagemCliente;
 import art.katpersonalizados.model.entity.Cliente;
+import art.katpersonalizados.model.entity.DadosPessoais;
 import art.katpersonalizados.repository.ClienteRepository;
 import art.katpersonalizados.service.ClienteService;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +20,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository clienteRepository;
 
-
     public ClienteServiceImpl(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
@@ -27,9 +27,13 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional
     @Override
     public DadosDetalhamentoCliente salvar(DadosCadastroCliente dados) {
-        Cliente c = new Cliente(dados);
-        clienteRepository.save(c);
-        return new DadosDetalhamentoCliente(c);
+        var cliente = new Cliente();
+        cliente.setAtivo(true);
+        cliente.setUsername(dados.username());
+        cliente.setDadosPessoais(new DadosPessoais(dados.dadosPessoais()));
+        clienteRepository.save(cliente);
+        return new DadosDetalhamentoCliente(cliente);
+
     }
 
     @Override
@@ -53,29 +57,10 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public DadosDetalhamentoCliente atualizar(DadosAtualizacaoCliente dados) {
         Cliente c = clienteRepository.findById(dados.idCliente()).orElseThrow(EntityNotFoundException::new);
-
         atualizarDadosPessoaisCliente(dados, c);
-        atualizarEnderecoCliente(dados, c);
-
         return new DadosDetalhamentoCliente(c);
     }
 
-    private static void atualizarEnderecoCliente(DadosAtualizacaoCliente dados, Cliente c) {
-        if (dados.endereco().cep() != null)
-            c.getEndereco().setCep(dados.endereco().cep());
-        if (dados.endereco().logradouro() != null)
-            c.getEndereco().setLogradouro(dados.endereco().logradouro());
-        if (dados.endereco().complemento() != null)
-            c.getEndereco().setComplemento(dados.endereco().complemento());
-        if (dados.endereco().bairro() != null)
-            c.getEndereco().setBairro(dados.endereco().bairro());
-        if (dados.endereco().localidade() != null)
-            c.getEndereco().setLocalidade(dados.endereco().localidade());
-        if (dados.endereco().uf() != null)
-            c.getEndereco().setUf(dados.endereco().uf());
-        if (dados.endereco().numero() != null)
-            c.getEndereco().setNumero(dados.endereco().numero());
-    }
 
     private static void atualizarDadosPessoaisCliente(DadosAtualizacaoCliente dados, Cliente c) {
         if (dados.username() != null)
