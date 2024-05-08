@@ -3,6 +3,7 @@ package art.katpersonalizados.model.entity;
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroCategoria;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class Categoria {
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
-    private List<Produto> produto;
+    private List<Produto> produtos = new ArrayList<>();
 
     private boolean ativo;
 
@@ -53,12 +54,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public List<Produto> getProduto() {
-        return produto;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto(List<Produto> produto) {
-        this.produto = produto;
+    public void setProdutos(List<Produto> produto) {
+        this.produtos = produto;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class Categoria {
         return "Categoria{" +
                 "idProduto=" + id +
                 ", nome='" + nome + '\'' +
-                ", produto=" + produto +
+                ", produto=" + produtos +
                 ", ativo=" + ativo +
                 '}';
     }

@@ -1,12 +1,23 @@
 package art.katpersonalizados.model.entity;
 
-import art.katpersonalizados.model.dados.DadosEndereco;
-import jakarta.persistence.Embeddable;
+import art.katpersonalizados.model.dados.cadastro.DadosCadastroEndereco;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @SuppressWarnings("unused")
-@Embeddable
+@Entity
 public class Endereco {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Cliente cliente;
+
+    private Boolean ativo;
 
     private String cep;
 
@@ -22,7 +33,7 @@ public class Endereco {
 
     private String numero;
 
-    public Endereco(DadosEndereco dados) {
+    public Endereco(DadosCadastroEndereco dados) {
         this.cep = dados.cep();
         this.logradouro = dados.logradouro();
         this.complemento = dados.complemento();
@@ -30,12 +41,33 @@ public class Endereco {
         this.localidade = dados.localidade();
         this.uf = dados.uf();
         this.numero = dados.numero();
+        this.ativo = true;
     }
 
     public Endereco() {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente clientes) {
+        this.cliente = clientes;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Boolean isAtivo() {
+        return ativo;
+    }
 
     public String getCep() {
         return cep;
@@ -94,9 +126,24 @@ public class Endereco {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Endereco endereco)) return false;
+        return Objects.equals(id, endereco.id) && Objects.equals(cliente, endereco.cliente) && Objects.equals(ativo, endereco.ativo) && Objects.equals(cep, endereco.cep) && Objects.equals(logradouro, endereco.logradouro) && Objects.equals(complemento, endereco.complemento) && Objects.equals(bairro, endereco.bairro) && Objects.equals(localidade, endereco.localidade) && Objects.equals(uf, endereco.uf) && Objects.equals(numero, endereco.numero);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cliente, ativo, cep, logradouro, complemento, bairro, localidade, uf, numero);
+    }
+
+    @Override
     public String toString() {
         return "Endereco{" +
-                "cep='" + cep + '\'' +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", ativo=" + ativo +
+                ", cep='" + cep + '\'' +
                 ", logradouro='" + logradouro + '\'' +
                 ", complemento='" + complemento + '\'' +
                 ", bairro='" + bairro + '\'' +

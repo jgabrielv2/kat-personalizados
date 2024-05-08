@@ -2,10 +2,12 @@ package art.katpersonalizados.model.entity;
 
 import art.katpersonalizados.model.dados.cadastro.DadosCadastroCliente;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-@Entity(name = "Cliente")
+@Entity
 @Table(name = "clientes")
 public class Cliente {
 
@@ -13,23 +15,17 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 2, max = 10)
     private String username;
 
     @Embedded
     private DadosPessoais dadosPessoais;
 
-    @Embedded
-    private Endereco endereco;
+    @OneToMany(mappedBy = "cliente")
+    private List<Endereco> enderecos = new ArrayList<>();
 
     private Boolean ativo;
 
-
-    public Cliente(DadosCadastroCliente dados) {
-        this.ativo = true;
-        this.username = dados.username();
-        this.dadosPessoais = new DadosPessoais(dados.dadosPessoais());
-        this.endereco = new Endereco(dados.endereco());
-    }
 
     public Cliente() {
 
@@ -55,12 +51,13 @@ public class Cliente {
         this.dadosPessoais = dadosPessoais;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public Boolean isAtivo() {
@@ -84,13 +81,14 @@ public class Cliente {
         return id != null ? id.hashCode() : 0;
     }
 
+
     @Override
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", dadosPessoais=" + dadosPessoais +
-                ", endereco=" + endereco +
+                ", enderecos=" + enderecos +
                 ", ativo=" + ativo +
                 '}';
     }
