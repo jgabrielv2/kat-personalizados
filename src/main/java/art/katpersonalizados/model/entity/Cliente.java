@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -29,6 +30,12 @@ public class Cliente {
 
     public Cliente() {
 
+    }
+
+    public Cliente(DadosCadastroCliente dados) {
+        this.username = dados.username();
+        this.dadosPessoais = new DadosPessoais(dados.dadosPessoais());
+        this.ativo = true;
     }
 
     public Long getId() {

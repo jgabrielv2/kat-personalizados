@@ -27,10 +27,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional
     @Override
     public DadosDetalhamentoCliente salvar(DadosCadastroCliente dados) {
-        var cliente = new Cliente();
-        cliente.setAtivo(true);
-        cliente.setUsername(dados.username());
-        cliente.setDadosPessoais(new DadosPessoais(dados.dadosPessoais()));
+        var cliente = new Cliente(dados);
         clienteRepository.save(cliente);
         return new DadosDetalhamentoCliente(cliente);
 
