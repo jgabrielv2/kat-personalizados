@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KatpersonalizadosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KatpersonalizadosApplication.class, args);
+		SpringApplication app = new SpringApplication(KatpersonalizadosApplication.class);
+		app.setBanner(new Banner());
+		app.run(args);
 	}
 
 }
